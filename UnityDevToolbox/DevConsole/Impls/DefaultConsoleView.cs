@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityDevToolbox.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,13 @@ namespace UnityDevToolbox.Impls
 
         public Button               mSubmitButton;
 
+        public uint                 mPageSize = 10;
+
         private bool                mIsInitialized = false;
+
+        private List<string>        mCurrentLogBuffer;
+
+        private int                 mCurrLineIndex;
         
         /// <summary>
         /// The method outputs log message into the console
@@ -34,13 +41,37 @@ namespace UnityDevToolbox.Impls
 
         public void Log(string message)
         {
-            mOutput.text += $"\n{message}";
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            mCurrentLogBuffer.Add(message);
+
+            _updateLogBufferView(mCurrentLogBuffer.ToArray(), mCurrLineIndex, (int)mPageSize);
         }
 
-        private void Awake()
+        /// <summary>
+        /// The method clears up current input of the console's view
+        /// </summary>
+
+        public void ClearInput()
         {
-            OnEnabled();
+            mInput.text = string.Empty;
         }
+
+        /// <summary>
+        /// The method clears up current output buffer of the console's view
+        /// </summary>
+
+        public void ClearOutput()
+        {
+            mOutput.text = string.Empty;
+
+            mCurrentLogBuffer.Clear();
+        }
+
+        private void Awake() => OnEnabled();
 
         private void OnEnabled()
         {
@@ -48,6 +79,8 @@ namespace UnityDevToolbox.Impls
             {
                 return;
             }
+
+            mCurrentLogBuffer = new List<string>();
 
             mSubmitButton?.onClick.AddListener(_onSubmitButtonClicked);
             
@@ -72,12 +105,31 @@ namespace UnityDevToolbox.Impls
             OnNewCommandSubmited?.Invoke(mInput.text);
         }
 
+        private void _updateLogBufferView(string[] linesBuffer, int currLineIndex, int pageSize)
+        {
+            mOutput.text = string.Join("\n", linesBuffer, currLineIndex, Math.Min(linesBuffer.Length - currLineIndex, pageSize));
+        }
+
 #if DEBUG
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 _onSubmitButtonClicked();
+            }
+
+            if (Input.GetKeyDown(KeyCode.PageUp))
+            {
+                mCurrLineIndex = Mathf.Max(0, mCurrLineIndex - 1);
+
+                _updateLogBufferView(mCurrentLogBuffer.ToArray(), mCurrLineIndex, (int)mPageSize);
+            }
+
+            if (Input.GetKeyDown(KeyCode.PageDown))
+            {
+                mCurrLineIndex = Mathf.Min(mCurrentLogBuffer.Count, mCurrLineIndex + 1);
+
+                _updateLogBufferView(mCurrentLogBuffer.ToArray(), mCurrLineIndex, (int)mPageSize);
             }
         }
 #endif

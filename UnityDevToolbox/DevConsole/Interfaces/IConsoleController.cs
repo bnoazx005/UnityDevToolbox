@@ -19,5 +19,11 @@
         /// <param name="commandName">An identifier of a command</param>
 
         void UnregisterCommand(string commandName);
+
+        /// <summary>
+        /// The method clears up current output buffer of the console's view
+        /// </summary>
+
+        void ClearOutput();
     }
 }

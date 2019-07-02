@@ -25,7 +25,9 @@ namespace UnityDevToolbox.Impls
                 throw new UnknownCommandException(input);
             }
 
-            string[] args = (tokensCount > 1) ? new string[tokens.Length - 1] : new string[0];
+            string[] args = (tokensCount > 1) ? new string[tokensCount - 1] : new string[0];
+
+            Array.Copy(tokens, 1, args, 0, tokensCount - 1);
 
             return new Tuple<string, string[]>(tokens[0], args);
         }

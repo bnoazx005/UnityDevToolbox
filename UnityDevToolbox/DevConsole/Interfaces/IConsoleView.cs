@@ -23,5 +23,17 @@
         /// <param name="message">A message should be displayed</param>
 
         void Log(string message);
+
+        /// <summary>
+        /// The method clears up current input of the console's view
+        /// </summary>
+
+        void ClearInput();
+
+        /// <summary>
+        /// The method clears up current output buffer of the console's view
+        /// </summary>
+
+        void ClearOutput();
     }
 }

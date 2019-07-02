@@ -21,6 +21,8 @@ namespace UnityDevToolbox.Impls
         {
             mView = view ?? throw new ArgumentNullException("view");
 
+            mView.ClearOutput();
+
             mArgsParser = argsParser ?? throw new ArgumentNullException("argsParser");
 
             mView.OnNewCommandSubmited += _processNewCommand;
@@ -53,11 +55,30 @@ namespace UnityDevToolbox.Impls
             mCommandsTable.Remove(commandName);
         }
 
+        /// <summary>
+        /// The method clears up current output buffer of the console's view
+        /// </summary>
+
+        public void ClearOutput() => mView?.ClearOutput();
+
         private void _processNewCommand(string input)
         {
             var result = mArgsParser.Parse(input);
 
-            IConsoleCommand command = mCommandsTable[result.Item1];
+            mView.ClearInput();
+
+            IConsoleCommand command = null;
+
+            try
+            {
+                command = mCommandsTable[result.Item1];
+            }
+            catch (KeyNotFoundException)
+            {
+                mView.Log($"<color=red>Unknown command: </color> {result.Item1}");
+
+                return;
+            }
 
             mView.Log(input);
             mView.Log(command.Run(result.Item2));
