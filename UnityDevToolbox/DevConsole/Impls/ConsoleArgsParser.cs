@@ -49,10 +49,8 @@ namespace UnityDevToolbox.Impls
                 // quoted args parsing
                 if (currCh == '\"')
                 {
-                    ++i;
-
                     // read 'til closing quote
-                    while ((i + 1 < input.Length) && (currCh = input[++i]) != '\"')
+                    while ((++i < input.Length) && (currCh = input[i]) != '\"')
                     {
                         currTokenBuffer.Append(currCh);
                     }
@@ -60,24 +58,25 @@ namespace UnityDevToolbox.Impls
                     if (currTokenBuffer.Length > 0)
                     {
                         tokens.Add(currTokenBuffer.ToString());
+
+                        currTokenBuffer.Clear();
                     }
 
-                    continue;
+                    ++i;
                 }
 
                 if (char.IsWhiteSpace(currCh))
                 {
                     // discard current buffer
-                    tokens.Add(currTokenBuffer.ToString());
+                    if (currTokenBuffer.Length > 0)
+                    {
+                        tokens.Add(currTokenBuffer.ToString());
+                    }
 
                     currTokenBuffer.Clear();
 
                     // find next token (skip all delimiters
-                    while ((i + 1 < input.Length) && char.IsWhiteSpace(currCh = input[++i]))
-                    {
-                    }
-
-                    ++i;
+                    while ((++i < input.Length) && char.IsWhiteSpace(currCh = input[i])) { }
 
                     continue;
                 }
