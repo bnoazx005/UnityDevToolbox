@@ -15,9 +15,13 @@ namespace UnityDevToolbox.Impls
 
         private IConsoleView                         mView;
 
-        public ConsoleController(IConsoleView view)
+        private IArgsParser<string>                  mArgsParser;
+
+        public ConsoleController(IConsoleView view, IArgsParser<string> argsParser)
         {
             mView = view ?? throw new ArgumentNullException("view");
+
+            mArgsParser = argsParser ?? throw new ArgumentNullException("argsParser");
 
             mView.OnNewCommandSubmited += _processNewCommand;
 
@@ -49,11 +53,14 @@ namespace UnityDevToolbox.Impls
             mCommandsTable.Remove(commandName);
         }
 
-        private void _processNewCommand(string commandName, string[] args)
+        private void _processNewCommand(string input)
         {
-            IConsoleCommand command = mCommandsTable[commandName];
+            var result = mArgsParser.Parse(input);
 
-            command.Run(args);
+            IConsoleCommand command = mCommandsTable[result.Item1];
+
+            mView.Log(input);
+            mView.Log(command.Run(result.Item2));
         }
     }
 }

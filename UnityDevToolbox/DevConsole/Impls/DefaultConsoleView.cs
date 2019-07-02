@@ -26,8 +26,6 @@ namespace UnityDevToolbox.Impls
         public Button               mSubmitButton;
 
         private bool                mIsInitialized = false;
-
-        private IArgsParser<string> mArgsParser;
         
         /// <summary>
         /// The method outputs log message into the console
@@ -39,6 +37,11 @@ namespace UnityDevToolbox.Impls
             mOutput.text += $"\n{message}";
         }
 
+        private void Awake()
+        {
+            OnEnabled();
+        }
+
         private void OnEnabled()
         {
             if (mIsInitialized)
@@ -47,9 +50,7 @@ namespace UnityDevToolbox.Impls
             }
 
             mSubmitButton?.onClick.AddListener(_onSubmitButtonClicked);
-
-            mArgsParser = new ConsoleArgsParser();
-
+            
 #if DEBUG
             Debug.LogWarning("[Default Console View] The console's view was initialized");
 #endif
@@ -67,10 +68,18 @@ namespace UnityDevToolbox.Impls
         }
 
         private void _onSubmitButtonClicked()
-        {
-            var args = mArgsParser.Parse(mInput.text);
-            
-            OnNewCommandSubmited?.Invoke(args.Item1, args.Item2);
+        {            
+            OnNewCommandSubmited?.Invoke(mInput.text);
         }
+
+#if DEBUG
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _onSubmitButtonClicked();
+            }
+        }
+#endif
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UnityDevToolbox.Interfaces
 {
-    public delegate void CommandAction(string commandName, params string[] args);
+    public delegate void CommandAction(string input);
 
     public delegate void EmptyAction();
 
