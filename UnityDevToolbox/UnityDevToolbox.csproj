@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Common\Exceptions.cs" />
     <Compile Include="DevConsole\Impls\ConsoleArgsParser.cs" />
+    <Compile Include="DevConsole\Impls\ConsoleCommandLambdaAdapter.cs" />
     <Compile Include="DevConsole\Impls\ConsoleController.cs" />
     <Compile Include="DevConsole\Impls\DefaultConsoleView.cs" />
     <Compile Include="DevConsole\Interfaces\IArgsParser.cs" />
