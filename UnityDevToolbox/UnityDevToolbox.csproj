@@ -53,11 +53,15 @@
     <Compile Include="DevConsole\Interfaces\IConsoleController.cs" />
     <Compile Include="DevConsole\Interfaces\IConsoleView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneManagment\Impls\BaseSceneHandler.cs" />
+    <Compile Include="SceneManagment\Impls\BootSceneComponent.cs" />
+    <Compile Include="SceneManagment\Interfaces\ISceneHandler.cs" />
     <Compile Include="UnityPoolSystem\Impls\GameObjectFactory.cs" />
     <Compile Include="UnityPoolSystem\Impls\ObjectPool.cs" />
     <Compile Include="UnityPoolSystem\Interfaces\IObjectFactory.cs" />
     <Compile Include="UnityPoolSystem\Interfaces\IObjectPool.cs" />
     <Compile Include="UnityPoolSystem\Interfaces\IPoolable.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
