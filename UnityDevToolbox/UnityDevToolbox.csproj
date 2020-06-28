@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CoroutineContext.cs" />
     <Compile Include="Common\Exceptions.cs" />
     <Compile Include="DevConsole\Impls\ConsoleArgsParser.cs" />
     <Compile Include="DevConsole\Impls\ConsoleCommandLambdaAdapter.cs" />
