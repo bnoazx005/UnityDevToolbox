@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDevToolbox", "UnityDev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDevToolboxTests", "UnityDevToolboxTests\UnityDevToolboxTests.csproj", "{70D20F01-888B-44B0-88A5-03723C164EFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditorDevToolbox", "UnityEditorDevToolbox\UnityEditorDevToolbox.csproj", "{1193B4EE-8EFD-4F0A-BAA0-A6A197E5184E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{70D20F01-888B-44B0-88A5-03723C164EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D20F01-888B-44B0-88A5-03723C164EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D20F01-888B-44B0-88A5-03723C164EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1193B4EE-8EFD-4F0A-BAA0-A6A197E5184E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1193B4EE-8EFD-4F0A-BAA0-A6A197E5184E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1193B4EE-8EFD-4F0A-BAA0-A6A197E5184E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1193B4EE-8EFD-4F0A-BAA0-A6A197E5184E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
