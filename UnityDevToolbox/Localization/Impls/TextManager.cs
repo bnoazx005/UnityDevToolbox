@@ -54,10 +54,22 @@ namespace UnityDevToolbox.Impls
         {
             if (!mIndexedDataTable.ContainsKey(key))
             {
-                return string.Empty;
+                return key;
             }
 
             return mCurrLoadedPackage.mData[mIndexedDataTable[key]].mValue;
+        }
+
+        /// <summary>
+        /// The method transforms input string of the following structure " aaa{key}bbbbb..."
+        /// So let assume that {key} equals to "one" so the result of the method will be "aaaonebbbb..."
+        /// </summary>
+        /// <param name="rawText"></param>
+        /// <returns></returns>
+
+        public string GetFormattedText(string rawText)
+        {
+            throw new NotImplementedException();
         }
 
         protected void _buildIndexedTable()
