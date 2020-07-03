@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections;
+using UnityDevToolbox.Interfaces;
 using UnityEngine;
 using UnityEngine.Networking;
 
 
 namespace UnityDevToolbox.Impls
 {
-    public class AssetBundleReader
+    public class AssetBundleReader: IAssetBundleReader
     {
-        public delegate void OnAssetBundleLoadedCallback(AssetBundleReader assetBundleReader);
-        public delegate void OnErrorCallback(object errorData);
-
         protected CoroutineContext mCoroutineContext;
 
         protected bool mIsOpened = false;

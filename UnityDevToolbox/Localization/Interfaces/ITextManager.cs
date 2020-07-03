@@ -9,7 +9,7 @@
 
     public interface ITextManager
     {
-        void Reload(E_LOCALE_TYPE locale);
+        void Reload(IAssetBundleReader assetBundleReader, E_LOCALE_TYPE locale);
 
         string GetText(string key);
     }

@@ -25,7 +25,7 @@ namespace UnityDevToolbox.Impls
             mLocalizationPackageName = packageName;
         }
 
-        public void Reload(AssetBundleReader assetBundleReader, E_LOCALE_TYPE locale)
+        public void Reload(IAssetBundleReader assetBundleReader, E_LOCALE_TYPE locale)
         {
             if (assetBundleReader == null)
             {
