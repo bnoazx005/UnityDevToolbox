@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityDevToolbox.Interfaces;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace UnityDevToolbox.Impls
 {
     public class TextManager : ITextManager
     {
+        public event OnLocalePackageChanged OnLocalizationChanged;
+
         protected CoroutineContext mCoroutineContext;
 
         protected TextDataPackage mCurrLoadedPackage;
@@ -42,6 +45,8 @@ namespace UnityDevToolbox.Impls
                     {
                         mCurrLoadedPackage = packagesBundle.GetPackage(locale);
                         _buildIndexedTable();
+
+                        OnLocalizationChanged?.Invoke();
                     }
                 },
                 (error) =>
@@ -69,7 +74,26 @@ namespace UnityDevToolbox.Impls
 
         public string GetFormattedText(string rawText)
         {
-            throw new NotImplementedException();
+            StringBuilder formattedString = new StringBuilder();
+
+            int pos = 0;
+            int endPos = 0;
+
+            while ((pos = rawText.IndexOf('{')) != -1)
+            {
+                formattedString.Append(rawText.Substring(0, pos));
+
+                endPos = rawText.IndexOf('}', pos);
+
+                if (endPos != -1)
+                {
+                    formattedString.Append(GetText(rawText.Substring(pos + 1, endPos - pos)));
+                }
+
+                rawText = rawText.Substring(((endPos != -1) ? endPos : pos) + 1);
+            }
+
+            return formattedString.ToString();
         }
 
         protected void _buildIndexedTable()

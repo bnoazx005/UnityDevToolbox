@@ -7,8 +7,13 @@
     }
 
 
+    public delegate void OnLocalePackageChanged();
+
+
     public interface ITextManager
     {
+        event OnLocalePackageChanged OnLocalizationChanged;
+
         void Reload(IAssetBundleReader assetBundleReader, E_LOCALE_TYPE locale);
 
         string GetText(string key);
