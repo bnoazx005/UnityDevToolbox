@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-
+using UnityDevToolbox.Interfaces;
 
 namespace UnityDevToolbox.Impls
 {
-    public class CoroutineContext
+    public class CoroutineContext: ICoroutineContext
     {
         private MonoBehaviour mContextOwner;
 
