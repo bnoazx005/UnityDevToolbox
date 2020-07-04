@@ -7,7 +7,7 @@ using UnityEngine;
 namespace UnityDevToolbox.Impls
 {
     [CreateAssetMenu]
-    public class TextDataPackage: ScriptableObject
+    public class TextDataPackage: ScriptableObject, ITextDataPackage
     {
         [Serializable]
         public struct TextDataEntity
@@ -17,11 +17,18 @@ namespace UnityDevToolbox.Impls
         }
 
         public List<TextDataEntity> mData = new List<TextDataEntity>();
+
+        public string GetTextValue(string key)
+        {
+            int index = mData.FindIndex(entity => entity.mKey == key);
+
+            return (index != -1) ? mData[index].mValue : key;
+        }
     }
 
 
     [CreateAssetMenu]
-    public class TextDataPackagesBundle: ScriptableObject
+    public class TextDataPackagesBundle: ScriptableObject, ITextDataPackagesBundle
     {
         [Serializable]
         public struct LocalePackageEntity
@@ -32,7 +39,7 @@ namespace UnityDevToolbox.Impls
 
         public List<LocalePackageEntity> mPackages = new List<LocalePackageEntity>();
 
-        public TextDataPackage GetPackage(E_LOCALE_TYPE locale)
+        public ITextDataPackage GetPackage(E_LOCALE_TYPE locale)
         {
             int index = mPackages.FindIndex(entity => entity.mLocale == locale);
 

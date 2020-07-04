@@ -10,7 +10,7 @@ namespace UnityDevToolbox.Impls
     {
         public event OnLocalePackageChanged OnLocalizationChanged;
 
-        protected CoroutineContext mCoroutineContext;
+        protected ICoroutineContext mCoroutineContext;
 
         protected TextDataPackage mCurrLoadedPackage;
 
@@ -18,7 +18,7 @@ namespace UnityDevToolbox.Impls
 
         protected string mLocalizationPackageName;
 
-        public TextManager(CoroutineContext coroutineContext, string packageName)
+        public TextManager(ICoroutineContext coroutineContext, string packageName)
         {
             mCoroutineContext = coroutineContext ?? throw new ArgumentNullException("coroutineContext");
 

@@ -58,6 +58,7 @@
     <Compile Include="DevConsole\Interfaces\IConsoleView.cs" />
     <Compile Include="Localization\Impls\TextDataPackage.cs" />
     <Compile Include="Localization\Impls\TextManager.cs" />
+    <Compile Include="Localization\Interfaces\ITextDataPackage.cs" />
     <Compile Include="Localization\Interfaces\ITextManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneManagment\Impls\BaseSceneHandler.cs" />
