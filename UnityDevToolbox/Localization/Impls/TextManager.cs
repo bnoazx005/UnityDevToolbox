@@ -12,9 +12,7 @@ namespace UnityDevToolbox.Impls
 
         protected ICoroutineContext mCoroutineContext;
 
-        protected TextDataPackage mCurrLoadedPackage;
-
-        protected IDictionary<string, int> mIndexedDataTable;
+        protected ITextDataPackage mCurrLoadedPackage;
 
         protected string mLocalizationPackageName;
 
@@ -23,7 +21,6 @@ namespace UnityDevToolbox.Impls
             mCoroutineContext = coroutineContext ?? throw new ArgumentNullException("coroutineContext");
 
             mCurrLoadedPackage = null;
-            mIndexedDataTable = new Dictionary<string, int>();
 
             mLocalizationPackageName = packageName;
         }
@@ -35,8 +32,6 @@ namespace UnityDevToolbox.Impls
                 throw new ArgumentNullException("assetBundleReader");
             }
 
-            mIndexedDataTable.Clear();
-
             assetBundleReader.OpenAsync((reader) =>
                 {
                     TextDataPackagesBundle packagesBundle = reader.LoadAsset<TextDataPackagesBundle>(mLocalizationPackageName);
@@ -44,8 +39,6 @@ namespace UnityDevToolbox.Impls
                     if (packagesBundle != null)
                     {
                         mCurrLoadedPackage = packagesBundle.GetPackage(locale);
-                        _buildIndexedTable();
-
                         OnLocalizationChanged?.Invoke();
                     }
                 },
@@ -57,12 +50,7 @@ namespace UnityDevToolbox.Impls
 
         public string GetText(string key)
         {
-            if (!mIndexedDataTable.ContainsKey(key))
-            {
-                return key;
-            }
-
-            return mCurrLoadedPackage.mData[mIndexedDataTable[key]].mValue;
+            return mCurrLoadedPackage.GetTextValue(key);
         }
 
         /// <summary>
@@ -94,16 +82,6 @@ namespace UnityDevToolbox.Impls
             }
 
             return formattedString.ToString();
-        }
-
-        protected void _buildIndexedTable()
-        {
-            var data = mCurrLoadedPackage.mData;
-
-            for (int i = 0; i < data.Count; ++i)
-            {
-                mIndexedDataTable.Add(data[i].mKey, i);
-            }
         }
     }
 }
