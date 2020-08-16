@@ -48,6 +48,7 @@
     <Compile Include="Common\Exceptions.cs" />
     <Compile Include="Common\Interfaces\IAssetBundleReader.cs" />
     <Compile Include="Common\Interfaces\ICoroutineContext.cs" />
+    <Compile Include="Common\Result.cs" />
     <Compile Include="DevConsole\Impls\ConsoleArgsParser.cs" />
     <Compile Include="DevConsole\Impls\ConsoleCommandLambdaAdapter.cs" />
     <Compile Include="DevConsole\Impls\ConsoleController.cs" />

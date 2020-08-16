@@ -55,6 +55,7 @@
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ResultTests.cs" />
     <Compile Include="DevConsole\ConsoleArgsParserTests.cs" />
     <Compile Include="Localization\TextManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

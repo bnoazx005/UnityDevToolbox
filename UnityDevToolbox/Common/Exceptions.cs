@@ -14,4 +14,20 @@ namespace UnityDevToolbox
         {
         }
     }
+
+    public class ResultBadAccessException: Exception
+    {
+        public ResultBadAccessException():
+            base("Try to access to Result<T, E> which has no actual data")
+        {
+        }
+    }
+
+    public class ResultErrorBadAccessException : Exception
+    {
+        public ResultErrorBadAccessException() :
+            base("Try to access to error of Result<T, E> which doesn't exist")
+        {
+        }
+    }
 }
