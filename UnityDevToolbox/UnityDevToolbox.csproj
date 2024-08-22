@@ -57,6 +57,11 @@
     <Compile Include="DevConsole\Interfaces\IConsoleCommand.cs" />
     <Compile Include="DevConsole\Interfaces\IConsoleController.cs" />
     <Compile Include="DevConsole\Interfaces\IConsoleView.cs" />
+    <Compile Include="GameModes\Impls\BaseGameMode.cs" />
+    <Compile Include="GameModes\Impls\GameModesCollection.cs" />
+    <Compile Include="GameModes\Impls\GameModesManager.cs" />
+    <Compile Include="GameModes\Interfaces\IGameMode.cs" />
+    <Compile Include="GameModes\Interfaces\IGameModesManager.cs" />
     <Compile Include="Localization\Impls\TextDataPackage.cs" />
     <Compile Include="Localization\Impls\TextManager.cs" />
     <Compile Include="Localization\Interfaces\ITextDataPackage.cs" />
